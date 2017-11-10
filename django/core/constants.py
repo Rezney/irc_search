@@ -1,0 +1,1 @@
+MESSAGES = '/app/messages'

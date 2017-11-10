@@ -1,0 +1,91 @@
+body {
+    padding-top: 10px;
+}
+
+
+/*CIRCLE AROUND ICONS */
+
+.i-circle-search {
+    padding: 10px 12px 10px 12px;
+    display: inline-block;
+    -moz-border-radius: 100px;
+    -webkit-border-radius: 100px;
+    border-radius: 100px;
+    -moz-box-shadow: 0px 0px 2px #888;
+    -webkit-box-shadow: 0px 0px 2px #888;
+    box-shadow: 0px 0px 2px #888;
+}
+
+.i-circle-up {
+    padding: 10px 11px 10px 11px;
+    display: inline-block;
+    -moz-border-radius: 100px;
+    -webkit-border-radius: 100px;
+    border-radius: 100px;
+    -moz-box-shadow: 0px 0px 2px #888;
+    -webkit-box-shadow: 0px 0px 2px #888;
+    box-shadow: 0px 0px 2px #888;
+}
+
+/*GET RID OF BROWSERS OUTLINE*/
+
+a {
+   outline: 0;
+}
+
+
+/*VERTICAL TABLE CENTER*/
+
+.table>tbody>tr>td {
+    vertical-align: middle;
+    display: table-cell;
+}
+
+
+/*CUSTOM FONT SIZE*/
+
+* {
+   font-size: 13px;
+   line-height: 2;
+}
+
+
+/*NAVBAR AND BADGE STYLES*/
+
+.badge {
+  margin-left: 3px;
+}
+
+.nav-tabs .badge{
+
+    background: #2d6987;
+}
+
+
+/*CUSTOM SPACER*/
+
+.spacer {
+    margin-top: 20px;
+}
+
+/* GET RID OF PADDING WHEN HIGHLIGHT*/
+
+mark { padding: 0; }
+
+/* LOGO VCENTER*/
+
+.logo-vcenter {
+  margin-top: 2px;
+}
+
+/* HOME VIEW SEARCH ICON VCENTER*/
+
+.search-vcenter {
+  margin-bottom: 5px;
+}
+
+/* BREAK TOO LONG WORDS*/
+
+td {
+  word-break: break-all;
+}

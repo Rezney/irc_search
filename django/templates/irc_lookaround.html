@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load highlights_filter %}
+{% block content %}
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<table width="100%" class="table table-striped table-bordered table-hover">
+						<thead>
+							<tr>
+								<th class="col-md-1 text-center">Date</th>
+								<th class="col-md-1 text-center">Nick</th>
+								<th class="col-md-8 text-center">Message</th>
+								<th class="col-md-1 text-center">Lookaround</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for message in lookaround %}
+							<tr {% if message.pk == message_picked.pk %} style="border-width: 2px; border-style: solid;" {% endif %}>
+								<td class="text-center">{{message.date|date:"Y-m-d G:i:s"}}</td>
+								<td class="text-center">{{message.nick}}</td>
+								<td>{{ message.message|urlize|search_match:request.session.search_term|search_match2:request.session.search_term2 }}</td>
+								<td class="text-center">{% if not message.pk == message_picked.pk %}<a href="{% url 'lookaround' channel message.pk %}"><i class="glyphicon glyphicon-search"></i></a>{% endif %}</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container-fluid">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      {% if channel_details %}
+      <div class="row">
+        {% for channel in channel_details %}
+        <div class="col-md-3">
+          <div class="panel panel-warning">
+            <div class="panel-heading">
+              <h3 class="panel-title">{{channel.name}}<a href="{% url 'search' %}?channel_id={{ channel.name }}"><i class="fa fa-search fa-2x pull-right" style="color:#DAA520"></i></a></h3>
+            </div>
+            <div class="panel-body">
+              Newest message: {{channel.latest.0|date:"Y-m-d G:i:s"}}<br/> Oldest message: {{channel.earliest.0|date:"Y-m-d G:i:s"}}<br/> Total messages: {{channel.count}}
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %} You do not have any messages in your DB! Please follow the instructions to get some... {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}
