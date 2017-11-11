@@ -102,7 +102,7 @@ class Command(BaseCommand):
         for channel in channels_dir:
             channel_dir = os.path.join(MESSAGES, channel)
             if os.path.isdir(channel_dir):
-                for log_fname in os.listdir(channel_dir):
+                for log_fname in sorted(os.listdir(channel_dir)):
                     pattern = '\d{4}-\d{2}-\d{2}.log$'
                     if re.match(pattern, log_fname):
                         log_path = os.path.join(channel_dir, log_fname)
