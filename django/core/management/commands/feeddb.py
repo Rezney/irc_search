@@ -34,7 +34,7 @@ def archive_log_file(log_fpath, channel_dir):
     os.unlink(tarball_fpath)
 
 
-def save_list(lst):
+def save_multiple_msgs(lst):
     try:
         IRCMessage.objects.bulk_create(lst)
     except IntegrityError:
@@ -76,10 +76,11 @@ def into_db(log_path, channel):
                 message_text = line_lst[2]
                 irc_message.message = message_text
                 message_list.append(irc_message)
-                if len(message_list) == 150:
-                    save_list(message_list)
+                # add into DB in one transaction
+                if len(message_list) == 120:
+                    save_multiple_msgs(message_list)
                     message_list = []
-        save_list(message_list)
+        save_multiple_msgs(message_list)
         if valid:
             logger.info('Some line(s) not valid...')
             valid = False
