@@ -41,6 +41,12 @@ are stripped away because of the lookaround.
 # docker build -t irc_search .
 ```
 
+If you have SElinux enforcing, run:
+
+```
+# setsebool -P container_manage_cgroup 1
+```
+
 ```
 # docker run -d --rm --name irc_search --cap-add=SYS_ADMIN -v /sys/fs/cgroup:/sys/fs/cgroup:ro -v $(pwd)/messages:/app/messages:Z -p 8080:80 irc_search
 ```
@@ -58,7 +64,7 @@ In order to get your channel messages into DB please follow the instructions:
 
 E.g channel #fedora
 
-1. Place "#fedora" or "fedora" ("#" sign is stripped away when processing) folder into "data/" directory in irc_search root.
+1. Place "#fedora" or "fedora" ("#" sign is stripped away when processing) folder into "messages/" directory in irc_search root.
    Repeat the same for every channel you want in the DB. Channel will be named as per directory name.
    
 2. Run "feedb" django management command inside your container.       
@@ -91,5 +97,5 @@ Here we provide "-a" option in order to archive already processed files. If the 
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
 
