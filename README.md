@@ -23,7 +23,7 @@ Example line in a file:
 
 "System" messages like:
 ```
-* joe is now known as joe_lunch" 
+* joe is now known as joe_lunch"
 ```
 are stripped away because of the lookaround.
 
@@ -66,14 +66,16 @@ E.g channel #fedora
 
 1. Place "#fedora" or "fedora" ("#" sign is stripped away when processing) folder into "messages/" directory in irc_search root.
    Repeat the same for every channel you want in the DB. Channel will be named as per directory name.
-   
+
 2. Run "feedb" django management command inside your container.       
 
 ```
-# docker exec -it irc_search python3 django/manage.py feeddb -a
+# docker exec -i irc_search python3 django/manage.py feeddb -a
 ```
-   
-Here we provide "-a" option in order to archive already processed files. If the option is not provided we will go through all the files again when feeding other logs though skipping them. 
+
+Here we provide "-a" option in order to archive already processed files. If the option is not provided we will go through all the files again when feeding other logs though skipping them.
+
+Then you can for example set a "cronjob" for periodically updating and feeding new logs.
 
 ### Maintenance
 
@@ -98,4 +100,3 @@ Here we provide "-a" option in order to archive already processed files. If the 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
-
