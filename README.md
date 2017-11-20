@@ -2,6 +2,8 @@
 
 Simple web tool based on Django for making basic search in your IRC messages.
 
+Feel free to fork and extend / tune as you wish!
+
 ## Getting Started
 
 Setting up an instance is done by using a container.
@@ -79,22 +81,28 @@ Then you can for example set a "cronjob" for periodically updating and feeding n
 
 ### Maintenance
 
-1. You can do whatever you want to your DB running:
+1. Do not forget to backup your DB in case of deleting the container:
+
+```
+# docker exec -i irc_search python3 manage.py dumpdata > db.json // db.json file will be saved on the host
+```
+
+2. You can do whatever you want to your DB running:
 
 ```
 # docker exec -it irc_search python3 django/manage.py dbshell
 ```
 
-2. Delete all messages with:
+3. Delete all messages with:
 
 ```
-# docker exec -it irc_search python3 django/manage.py delete -a
+# docker exec -i irc_search python3 django/manage.py delete -a
 ```
 
-2. Delete messages for particular channel:
+4. Delete messages for particular channel:
 
 ```
-# docker exec -it irc_search python3 django/manage.py delete fedora
+# docker exec -i irc_search python3 django/manage.py delete fedora
 ```
 
 ## License
