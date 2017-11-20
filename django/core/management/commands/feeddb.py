@@ -99,14 +99,21 @@ class Command(BaseCommand):
                             )
 
     def handle(self, *args, **options):
-        channels_dir = os.listdir(MESSAGES)
-        for channel in channels_dir:
+        channels = [chan_dir for chan_dir in os.listdir(MESSAGES)
+                    if os.path.isdir(os.path.join(MESSAGES, chan_dir))]
+        if not channels:
+            logger.info('No channel dir in the messages folder...')
+            return
+        for channel in channels:
             channel_dir = os.path.join(MESSAGES, channel)
-            if os.path.isdir(channel_dir):
-                for log_fname in sorted(os.listdir(channel_dir)):
-                    pattern = '\d{4}-\d{2}-\d{2}.log$'
-                    if re.match(pattern, log_fname):
-                        log_path = os.path.join(channel_dir, log_fname)
-                        into_db(log_path, channel)
-                        if options['archive']:
-                            archive_log_file(log_path, channel_dir)
+            pattern = '\d{4}-\d{2}-\d{2}.log$'
+            log_fnames = [log_fname for log_fname in sorted(os.listdir(channel_dir))
+                          if re.match(pattern, log_fname)]
+            if not log_fnames:
+                logger.info('There are no messages to consume in {}...'.format(channel))
+                continue
+            for log_fname in log_fnames:
+                log_path = os.path.join(channel_dir, log_fname)
+                into_db(log_path, channel)
+                if options['archive']:
+                    archive_log_file(log_path, channel_dir)
